@@ -1,23 +1,19 @@
-class Sport:
-    def __init__(self, sport, hours):
-        self.sport = sport
-        self.hours = hours
-    @staticmethod
-    def play(sport, hours):
-        print("PLaying", sport, "takes", hours, "hours.") 
+import abc
 
-class Baseball(Sport): 
-    def __init__(self, sport, hours):
-        super().__init__(sport, hours) #1
-        self.sport = "baseball"
-        self.hours = 4
+class Sport(metaclass=abc.ABCMeta):
+    @abc.abstractclassmethod # 限制他的子類別，一定要實作talk的方法
+    def play(self):
+        pass
 
-class Basketball(Sport): 
-    def __init__(self, sport, hours):
-        super().__init__(sport, hours) #1
-        self.sport = "basketball"
-        self.hours = 2
-Baseball = Sport(Baseball, 2)
-Baseball.play("baseball", 2)
-Basketball = Sport(Basketball, 4)
-Basketball.play("basketball", 4)
+class Basketball(Sport):
+    def play(self):
+        print("Playng basketball takes 2 hours.")
+
+class Baseball(Sport):
+    def play(self):
+        print("Playng baseball takes 4 hours.")
+
+basketball = Basketball()
+baseball = Baseball()
+basketball.play()
+baseball.play()
